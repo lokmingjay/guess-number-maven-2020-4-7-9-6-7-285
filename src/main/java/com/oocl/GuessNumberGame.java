@@ -43,11 +43,26 @@ public class GuessNumberGame {
        // return "";
    // }
 
-    public List<Character> getCommonElement(String input) {
-       List<Character> inputCharList = input.chars().mapToObj(element -> (char)element).collect(Collectors.toList());
+
+
+    public String play(String input) {
+        int correctValueOnly=0;
+        int correctValueAndPosition=0;
+        List<Character> inputCharList = input.chars().mapToObj(element -> (char)element).collect(Collectors.toList());
+        List<Character> commonCharList = input.chars().mapToObj(element -> (char)element).collect(Collectors.toList());
        List<Character> randomAnsCharList = randomAnswer.chars().mapToObj(element -> (char)element).collect(Collectors.toList());
-       inputCharList.retainAll(randomAnsCharList);
-        return inputCharList;
+       commonCharList.retainAll(randomAnsCharList);
+
+       for(Character ch : commonCharList){
+           if(inputCharList.indexOf(ch)==randomAnsCharList.indexOf(ch)){
+               correctValueAndPosition++;
+           }else{
+               correctValueOnly++;
+           }
+       }
+        return correctValueAndPosition +  "A" + correctValueOnly + "B";
 
     }
+
+
 }

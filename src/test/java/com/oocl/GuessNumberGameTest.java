@@ -18,14 +18,27 @@ public class GuessNumberGameTest {
         Boolean result = checkDuplicatedChar(randomAnswer);
         assertEquals(true, result);
     }
+
     @Test
-    public void should_get_same_number_between_input_and_random_number(){
+    public void shoud_determine_no_of_correct_value_and_position(){
+        String result = "";
         GuessNumberGame guessNumberGame = new GuessNumberGame();
-        guessNumberGame.setRandomAnswer("5234");
-        List<Character> result = guessNumberGame.getCommonElement("1543");
-        List<Character> expect = Arrays.asList('5','4','3');
-        Assert.assertEquals(expect,result);
+        guessNumberGame.setRandomAnswer("1234");
+        result = guessNumberGame.play("1567");
+        Assert.assertEquals("1A0B",result);
+        result = guessNumberGame.play("2478");
+        Assert.assertEquals("0A2B",result);
+        result = guessNumberGame.play("0324");
+        Assert.assertEquals("1A2B",result);
+        result = guessNumberGame.play("5678");
+        Assert.assertEquals("0A0B",result);
+        result = guessNumberGame.play("4321");
+        Assert.assertEquals("0A4B",result);
+        result = guessNumberGame.play("1234");
+        Assert.assertEquals("4A0B",result);
     }
+
+
     private Boolean checkDuplicatedChar(String randomAnswer) {
         HashSet<Character> characterSet = new HashSet<Character>();
         for (int index = 0; index < randomAnswer.length(); index++) {
