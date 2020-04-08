@@ -38,7 +38,6 @@ public class GuessNumberGameTest {
         Assert.assertEquals("4A0B",result);
     }
 
-
     private Boolean checkDuplicatedChar(String randomAnswer) {
         HashSet<Character> characterSet = new HashSet<Character>();
         for (int index = 0; index < randomAnswer.length(); index++) {
