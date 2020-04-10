@@ -1,10 +1,8 @@
 package com.oocl;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.util.Scanner;
 
-public class ConsoleInputReader implements inputReader {
+public class ConsoleInputReader implements InputReader {
 
 
     public String getInput() {

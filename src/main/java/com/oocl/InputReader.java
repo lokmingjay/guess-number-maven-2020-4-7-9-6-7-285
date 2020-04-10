@@ -1,5 +1,5 @@
 package com.oocl;
 
-public interface inputReader {
+public interface InputReader {
     String getInput();
 }
