@@ -21,7 +21,7 @@ public class App {
         while (chance < MAX_CHANCE) {
             String input = new ConsoleInputReader().getInput();
 
-            if ((!checkDuplicatedNUmber(input)) || !inputValidator.checkDigitNumber(input)) {
+            if ((!inputValidator.checkDuplicatedNUmber(input)) || !inputValidator.checkDigitNumber(input)) {
                 System.out.println("Wrong Input,try again\n");
                 continue;
             }
@@ -40,14 +40,4 @@ public class App {
         System.out.println("You have already tried 6 times, you lose!");
     }
 
-
-    public static Boolean checkDuplicatedNUmber(String input) {
-        Set<Character> set = new HashSet<>();
-        for (int index = 0; index < input.length(); index++) {
-            if (!set.add(input.charAt(index))) {
-                return false;
-            }
-        }
-        return true;
-    }
 }
