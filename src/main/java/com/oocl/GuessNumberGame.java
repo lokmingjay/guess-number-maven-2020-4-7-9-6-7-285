@@ -8,7 +8,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 public class GuessNumberGame {
-    private static final int RANDOM_DIGIT = 4;
+
 
     private String randomAnswer;
 
@@ -21,47 +21,38 @@ public class GuessNumberGame {
         this.randomAnswer = randomAnswer;
     }
 
-
-    public GuessNumberGame() {
-        randomAnswer = randomNumberGenerator();
+    public GuessNumberGame(RandomGeneratorIF randomGenerator) {
+        randomAnswer = randomNumberGenerator(randomGenerator);
     }
 
-    private String randomNumberGenerator() {
-        Integer[] randomArray = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-        String randomNumberString = "";
-        Collections.shuffle(Arrays.asList(randomArray));
-        for (int index = 0; index < RANDOM_DIGIT; index++) {
-            randomNumberString += randomArray[index];
-        }
-        return randomNumberString;
+    private String randomNumberGenerator(RandomGeneratorIF randomGenerator) {
+        return randomGenerator.generate();
     }
 
-   // public String play(String input) {
-        // first get the common element from the input where value is same as random value
-        // e.g. 2 only, for this two ,we can compare the position between string is same
+    // public String play(String input) {
+    // first get the common element from the input where value is same as random value
+    // e.g. 2 only, for this two ,we can compare the position between string is same
 
-       // return "";
-   // }
-
+    // return "";
+    // }
 
 
     public String play(String input) {
-        int correctValueOnly=0;
-        int correctValueAndPosition=0;
-        List<Character> inputCharList = input.chars().mapToObj(element -> (char)element).collect(Collectors.toList());
-        List<Character> commonCharList = input.chars().mapToObj(element -> (char)element).collect(Collectors.toList());
-       List<Character> randomAnsCharList = randomAnswer.chars().mapToObj(element -> (char)element).collect(Collectors.toList());
-       commonCharList.retainAll(randomAnsCharList);
+        int correctValueOnly = 0;
+        int correctValueAndPosition = 0;
+        List<Character> inputCharList = input.chars().mapToObj(element -> (char) element).collect(Collectors.toList());
+        List<Character> commonCharList = input.chars().mapToObj(element -> (char) element).collect(Collectors.toList());
+        List<Character> randomAnsCharList = randomAnswer.chars().mapToObj(element -> (char) element).collect(Collectors.toList());
+        commonCharList.retainAll(randomAnsCharList);
 
-       for(Character ch : commonCharList){
-           if(inputCharList.indexOf(ch)==randomAnsCharList.indexOf(ch)){
-               correctValueAndPosition++;
-           }else{
-               correctValueOnly++;
-           }
-       }
-        return correctValueAndPosition +  "A" + correctValueOnly + "B";
-
+        for (Character ch : commonCharList) {
+            if (inputCharList.indexOf(ch) == randomAnsCharList.indexOf(ch)) {
+                correctValueAndPosition++;
+            } else {
+                correctValueOnly++;
+            }
+        }
+        return correctValueAndPosition + "A" + correctValueOnly + "B";
     }
 
 

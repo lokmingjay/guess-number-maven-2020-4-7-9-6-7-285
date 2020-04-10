@@ -1,38 +1,33 @@
 package com.oocl;
 
 
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class App
-{
+public class App {
     public static final int MAX_CHANCE = 6;
     public static final int INPUT_LENGTH = 4;
-    public static void main( String[] args )
-    {
+    public static final String winReuslt = "4A0B";
+
+    public static void main(String[] args) {
         System.out.println("Start Game! Please guess:\n");
-        GuessNumberGame guessNumberGame = new GuessNumberGame();
-        int chance=0;
-        while(chance<MAX_CHANCE) {
-            String input = "";
-            while(true){
-            Scanner scanner = new Scanner(System.in);
-                 input = scanner.next();
-            if(( !checkDuplicatedNUmber(input)) || !checkDigitNumber(input) ){
-                System.out.println("Wrong Input,try again");
-            }else{
-                break;
-            }
-            }
+        GuessNumberGame guessNumberGame = new GuessNumberGame(new RandomGenerator());
+        System.out.println(guessNumberGame.getRandomAnswer());
+        int chance = 0;
+        while (chance < MAX_CHANCE) {
+            String input = new ConsoleInputReader().getInput();
+                if ((!checkDuplicatedNUmber(input)) || !checkDigitNumber(input)) {
+                    System.out.println("Wrong Input,try again\n");
+                    chance--;
+                }
             String result = guessNumberGame.play(input);
-            if(result.equals("4A0B")){
+            if (result.equals(winReuslt)) {
                 System.out.println(result);
                 System.out.println("Win,All Correct");
-                break;
+                return;
             }
             System.out.println(result);
             chance++;
@@ -41,14 +36,13 @@ public class App
     }
 
     public static Boolean checkDigitNumber(String input) {
-        return input.length()==INPUT_LENGTH;
+        return input.length() == INPUT_LENGTH;
     }
 
     public static Boolean checkDuplicatedNUmber(String input) {
         Set<Character> set = new HashSet<>();
-        for(int index =0 ; index < input.length(); index++){
-            if(!set.add(input.charAt(index))){
-                System.out.println("false");
+        for (int index = 0; index < input.length(); index++) {
+            if (!set.add(input.charAt(index))) {
                 return false;
             }
         }
