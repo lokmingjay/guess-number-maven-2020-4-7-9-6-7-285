@@ -29,14 +29,6 @@ public class GuessNumberGame {
         return randomGenerator.generate();
     }
 
-    // public String play(String input) {
-    // first get the common element from the input where value is same as random value
-    // e.g. 2 only, for this two ,we can compare the position between string is same
-
-    // return "";
-    // }
-
-
     public String play(String input) {
         int correctValueOnly = 0;
         int correctValueAndPosition = 0;
