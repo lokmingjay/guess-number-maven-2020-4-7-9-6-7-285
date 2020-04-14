@@ -5,8 +5,9 @@ import java.util.Set;
 
 public class InputValidator {
     public static final int INPUT_LENGTH = 4;
+
     public Boolean checkDigitNumber(String input) {
-        return  input.length() ==INPUT_LENGTH;
+        return input.length() == INPUT_LENGTH;
     }
 
     public Boolean checkDuplicatedNUmber(String input) {

@@ -8,10 +8,8 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 public class GuessNumberGame {
-
-
     private String randomAnswer;
-
+    public static final String ANSWER_RESULT_PATTERN = "%sA%sB";
 
     public String getRandomAnswer() {
         return randomAnswer;
@@ -22,30 +20,25 @@ public class GuessNumberGame {
     }
 
     public GuessNumberGame(RandomGeneratorIF randomGenerator) {
-        randomAnswer = randomNumberGenerator(randomGenerator);
+        randomAnswer = randomGenerator.generate();
     }
 
-    private String randomNumberGenerator(RandomGeneratorIF randomGenerator) {
-        return randomGenerator.generate();
-    }
+    public String play(String inputNumber) {
+        int positionAndValueCorrectCount = 0;
+        int onlyNumberCorrectCount = 0;
 
-    public String play(String input) {
-        int correctValueOnly = 0;
-        int correctValueAndPosition = 0;
-        List<Character> inputCharList = input.chars().mapToObj(element -> (char) element).collect(Collectors.toList());
-        List<Character> commonCharList = input.chars().mapToObj(element -> (char) element).collect(Collectors.toList());
-        List<Character> randomAnsCharList = randomAnswer.chars().mapToObj(element -> (char) element).collect(Collectors.toList());
-        commonCharList.retainAll(randomAnsCharList);
-
-        for (Character ch : commonCharList) {
-            if (inputCharList.indexOf(ch) == randomAnsCharList.indexOf(ch)) {
-                correctValueAndPosition++;
-            } else {
-                correctValueOnly++;
+        for (char number : inputNumber.toCharArray()) {
+            boolean isPositionAndNumberCorrect = this.randomAnswer.contains(Character.toString(number)) &&
+                    this.randomAnswer.indexOf(number) == inputNumber.indexOf(number);
+            boolean onlyNumberCorrect = this.randomAnswer.contains(Character.toString(number)) &&
+                    this.randomAnswer.indexOf(number) != inputNumber.indexOf(number);
+            if (isPositionAndNumberCorrect) {
+                positionAndValueCorrectCount++;
+            }
+            if (onlyNumberCorrect) {
+                onlyNumberCorrectCount++;
             }
         }
-        return correctValueAndPosition + "A" + correctValueOnly + "B";
+        return String.format(ANSWER_RESULT_PATTERN, positionAndValueCorrectCount, onlyNumberCorrectCount);
     }
-
-
 }
