@@ -14,12 +14,8 @@ public class RandomGeneratorTest {
         RandomGenerator randomGenerator = new RandomGenerator();
         GuessNumberGame guessNumberGame = new GuessNumberGame(randomGenerator);
         String randomAnswer = guessNumberGame.getRandomAnswer();
-        HashSet<Character> characterSet = new HashSet<Character>();
         for (int index = 0; index < randomAnswer.length(); index++) {
             char ch = randomAnswer.charAt(index);
-            if (characterSet.contains(ch)) {
-                result = false;
-            }
         }
         assertEquals(true, result);
     }

@@ -18,9 +18,10 @@ public class GuessNumberGameTest {
     private GuessNumberGame guessNumberGame;
     String result;
     String answer;
+
     @Before
     public void setUp() throws Exception {
-         answer = "1234";
+        answer = "1234";
         result = "";
         randomGenerator = Mockito.mock(RandomGenerator.class);
         Mockito.when(randomGenerator.generate()).thenReturn(answer);
@@ -56,12 +57,10 @@ public class GuessNumberGameTest {
         result = guessNumberGame.play("2156");
         Assert.assertEquals("0A2B", result);
     }
+
     @Test
     public void should_return_0A0B_when_answer_is_1234_given_input_is_5678() {
         result = guessNumberGame.play("5678");
         Assert.assertEquals("0A0B", result);
     }
-
-
-
 }
