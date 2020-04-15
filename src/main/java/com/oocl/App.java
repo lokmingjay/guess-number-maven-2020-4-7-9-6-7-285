@@ -2,11 +2,11 @@ package com.oocl;
 
 
 public class App {
-    public static final String LOSE_MESSAGE = "You have already tried 6 times, you lose!";
+    private static final String LOSE_MESSAGE = "You have already tried 6 times, you lose!";
     private static final int MAX_CHANCE = 6;
     private static final String winResult = "4A0B";
-    public static final String WIN_MESSAGE = "Win,All Correct";
-    public static final String WRONG_INPUT_MESSAGE = "Wrong Input,try again\n";
+    private static final String WIN_MESSAGE = "Win,All Correct";
+    private static final String WRONG_INPUT_MESSAGE = "Wrong Input,try again\n";
 
     public static void main(String[] args) {
         GuessNumberGame guessNumberGame = new GuessNumberGame(new RandomGenerator());
@@ -35,5 +35,4 @@ public class App {
         }
         System.out.println(LOSE_MESSAGE);
     }
-
 }
